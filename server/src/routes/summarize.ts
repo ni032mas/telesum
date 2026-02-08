@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { runSummarization, progressEmitter, getIsRunning } from "../services/summarize";
+import { logger } from "../services/logger";
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.post("/", async (_req, res, next) => {
     }
     // Start async, don't await
     runSummarization().catch((err) => {
-      console.error("[Summarize]", err.message);
+      logger.error("Summarize", err.message);
     });
     res.json({ started: true });
   } catch (err) {

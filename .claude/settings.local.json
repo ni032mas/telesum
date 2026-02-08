@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "TodoWrite",
+      "NotebookEdit",
+      "mcp__mobile__*",
+      "mcp__idea__*",
+      "mcp__context7__*",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:brainstorming)"
+    ]
+  }
+}

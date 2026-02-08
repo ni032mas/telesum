@@ -4,6 +4,7 @@ import { getSourceChats, readMessages, sendMessageToChat, isAuthenticated } from
 import { summarize as llmSummarize } from "./llm";
 import { insertSummary } from "./database";
 import { sendSummaryViaBot } from "./bot";
+import { logger } from "./logger";
 import type { SummarizeProgress } from "../types";
 
 export const progressEmitter = new EventEmitter();
@@ -101,7 +102,7 @@ export async function runSummarization(): Promise<void> {
         try {
           await sendSummaryViaBot(config.DEST_USER_ID, `**${chat.title}**\n\n${summary}`);
         } catch (err: any) {
-          console.error(`[Bot] Failed to send: ${err.message}`);
+          logger.error("Bot", `Failed to send: ${err.message}`);
         }
       }
 
@@ -112,7 +113,7 @@ export async function runSummarization(): Promise<void> {
           try {
             await sendMessageToChat(destChat, `**${chat.title}**\n\n${summary}`);
           } catch (err: any) {
-            console.error(`[Userbot] Failed to send to ${destChat}: ${err.message}`);
+            logger.error("Userbot", `Failed to send to ${destChat}: ${err.message}`);
           }
         }
       }
