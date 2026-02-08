@@ -2,6 +2,7 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { readConfig } from "./config";
+import { logger } from "./logger";
 
 const PROMPT_PATH = path.join(__dirname, "../../../prompt.md");
 
@@ -40,6 +41,7 @@ function runCli(cli: string, model: string, prompt: string): Promise<string> {
     const child = spawn(cli, args, {
       stdio: ["pipe", "pipe", "pipe"],
       timeout: 300000,
+      shell: true,
     });
 
     let stdout = "";
@@ -58,7 +60,7 @@ function runCli(cli: string, model: string, prompt: string): Promise<string> {
 
     child.on("close", (code) => {
       if (code !== 0) {
-        console.error(`[LLM] stderr: ${stderr}`);
+        logger.error("LLM", `stderr: ${stderr}`);
         reject(new Error(`LLM CLI exited with code ${code}: ${stderr.slice(0, 500)}`));
       } else {
         resolve(stdout.trim());

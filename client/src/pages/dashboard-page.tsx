@@ -6,6 +6,7 @@ import { ProgressPanel, type ProgressEvent } from "@/components/progress-panel";
 import { useSse } from "@/hooks/use-sse";
 import { getChats, type ChatInfo } from "@/api/chats";
 import { startSummarization } from "@/api/summarize";
+import { LogPanel } from "@/components/log-panel";
 import { Loader2, Play, RefreshCw } from "lucide-react";
 
 export function DashboardPage() {
@@ -115,6 +116,8 @@ export function DashboardPage() {
           </div>
         )}
       </div>
+
+      <LogPanel />
     </div>
   );
 }
