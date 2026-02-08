@@ -1,0 +1,16 @@
+{
+  "name": "telesum",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Telegram Chat Summary Bot — Web UI",
+  "scripts": {
+    "install:all": "cd client && npm install && cd ../server && npm install",
+    "dev": "concurrently -n client,server -c blue,green \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "build": "cd client && npm run build && cd ../server && npm run build",
+    "start": "cd server && npm start",
+    "postinstall": "npm run install:all"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
